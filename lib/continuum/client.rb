@@ -78,9 +78,9 @@ module Continuum
     # AGG:[interval-AGG:][rate:]metric[{tag1=value1[,tag2=value2...]}]
     def query options = {}
       format = options.delete(:format) || options.delete('format') || 'json'
-      options[format.to_sym] = true
+      options[:format] = format
       params   = query_params(options, [:start, :m])
-      response = @client.get "/q?#{params}"
+      response = @client.get "/q?#{params}" 
 
       if format.to_sym == :json
         JSON.parse response.body
